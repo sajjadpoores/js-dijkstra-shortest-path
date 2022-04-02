@@ -1,4 +1,4 @@
-// https://github.com/gwtw/js-fibonacci-heap
+// SOURCE: https://github.com/gwtw/js-fibonacci-heap
 'use strict';
 
 /**

@@ -7,23 +7,36 @@
     <title>Cummunere problem</title>
     <script src="./initial.js" defer></script>
     <script src="./utility.js" defer></script>
+    <script src="./graph.js" defer></script>
+    <script type="text/javascript" src="./vis-network.min.js" defer></script>
     <script src="./app.js" defer></script>
     <script src="./fibonacci-heap.js" defer></script>
     <script src="./dijkstra.js" defer></script>
 </head>
 <body>
-    <p>houses (space separated):</p>
-    <input id="houses" type="text" autofocus="true" value="2 6 9 11 15">
+    <div style="display: flex; flex-wrap: wrap;">
+        <div style="flex: 1; flex-basis: 300px;">
+            <h2>Inputs</h2>
+            <p>houses (space separated):</p>
+            <input id="houses" type="text" autofocus="true" value="2 6 9 11 15">
+        
+            <p>markets (space separated):</p>
+            <input id="markets" type="text" value="3 7 12 14">
+        
+            <p>bridges (space separated):</p>
+            <input id="bridges" type="text" value="5 9 15">
+        
+            <p>piers (space separated):</p>
+            <input id="piers" type="text" value="7 14">
+        
+            <button id="submit">submit</button>
+        </div>
+        <div style="flex: 2;  flex-basis: 400px;">
+            <h2>visualization</h2>
+            <div id="visualization" style="height: 500px; border: 1px solid black"></div>
+        </div>    
+    </div>
+    
 
-    <p>markets (space separated):</p>
-    <input id="markets" type="text" value="3 7 12 14">
-
-    <p>bridges (space separated):</p>
-    <input id="bridges" type="text" value="5 9 15">
-
-    <p>piers (space separated):</p>
-    <input id="piers" type="text" value="7 14">
-
-    <button id="submit">submit</button>
 </body>
 </html>
