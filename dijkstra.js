@@ -7,11 +7,11 @@ function findNextNode(queue) {
 function dikstra(startNode) {
   startNode.distanceToSource = 0;
 
-  const queue = [startNode, ...bridgesNodes, ...piersNodes, ...marketsNodes];
+  const allNodes = [startNode, ...bridgesNodes, ...piersNodes, ...marketsNodes];
   let heap = new FibonacciHeap((a, b) => {
     return +(a.key.distanceToSource - b.key.distanceToSource);
   });
-  queue.forEach((q) => heap.insert(q));
+  allNodes.forEach((q) => heap.insert(q));
 
   let candidate;
   while ((candidate = heap.extractMinimum())) {
