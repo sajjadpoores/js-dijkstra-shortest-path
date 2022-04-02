@@ -16,3 +16,4 @@ const marketsInput = document.getElementById('markets');
 const bridgesInput = document.getElementById('bridges');
 const piersInput = document.getElementById('piers');
 const submitBtn = document.getElementById('submit');
+const whichInput = document.getElementById('whichHouse');

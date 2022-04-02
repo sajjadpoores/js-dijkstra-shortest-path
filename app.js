@@ -1,8 +1,9 @@
-submitBtn.addEventListener("click", () => {
+function calulateGraphAndShortestPath() {
   houses = getNumbersFromInput(housesInput);
   markets = getNumbersFromInput(marketsInput);
   bridges = getNumbersFromInput(bridgesInput);
   piers = getNumbersFromInput(piersInput);
+  whichInput.value = whichInput.value % houses.length;
 
   const { graph, cleanGraphForShortestPath, createVisualization } = createGraph(
     houses,
@@ -11,10 +12,14 @@ submitBtn.addEventListener("click", () => {
     piers
   );
 
+  cleanGraphForShortestPath();
+  dikstra(graph[+whichInput.value]);
   createVisualization();
-  // graph.forEach(house => {
-  dikstra(graph[0]);
-  createVisualization();
-  // cleanGraphForShortestPath();
-  // })
+}
+submitBtn.addEventListener("click", () => {
+  calulateGraphAndShortestPath();
+});
+
+whichInput.addEventListener("change", () => {
+  calulateGraphAndShortestPath();
 });

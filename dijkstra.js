@@ -1,11 +1,9 @@
-function findNextNode(queue) {
-  return queue.reduce(function (prev, curr) {
-    return prev.distanceToSource < curr.distanceToSource ? prev : curr;
-  });
-}
-
 function dikstra(startNode) {
   startNode.distanceToSource = 0;
+  startNode.label =
+    startNode.type[0].toUpperCase() +
+    startNode.index +
+    ` [${startNode.distanceToSource}]`;
 
   const allNodes = [startNode, ...bridgesNodes, ...piersNodes, ...marketsNodes];
   let heap = new FibonacciHeap((a, b) => {
