@@ -11,15 +11,8 @@ const NODE_TYPE = {
     PIER: 'pier'
 }
 
-let houses = [];
-let markets = [];
-let bridges = [];
-let piers = [];
-
 const housesInput = document.getElementById('houses');
 const marketsInput = document.getElementById('markets');
 const bridgesInput = document.getElementById('bridges');
 const piersInput = document.getElementById('piers');
 const submitBtn = document.getElementById('submit');
-
-let GRAPH = [];

@@ -9,19 +9,19 @@ let EDGES = [];
 function getNodeColor(type) {
   switch (type) {
     case NODE_TYPE.HOUSE:
-      return '#00FF00'
+      return "#00FF00";
       break;
-      case NODE_TYPE.BRIDGE:
-        return '#FFA500'
-        break;
-        case NODE_TYPE.MARKET:
-        return '#800080'
-        break;
-        case NODE_TYPE.PIER:
-        return '#FF0000'
-        break;
+    case NODE_TYPE.BRIDGE:
+      return "#FFA500";
+      break;
+    case NODE_TYPE.MARKET:
+      return "#800080";
+      break;
+    case NODE_TYPE.PIER:
+      return "#FF0000";
+      break;
     default:
-      return "#FFF"
+      return "#FFF";
       break;
   }
 }
@@ -29,22 +29,23 @@ function getNodeColor(type) {
 function getNodeX(type) {
   switch (type) {
     case NODE_TYPE.HOUSE:
-      return 0
+      return 0;
       break;
-      case NODE_TYPE.BRIDGE:
-        return 300
-        break;
-        case NODE_TYPE.MARKET:
-        return 600
-        break;
-        case NODE_TYPE.PIER:
-        return 300
-        break;
+    case NODE_TYPE.BRIDGE:
+      return 300;
+      break;
+    case NODE_TYPE.MARKET:
+      return 600;
+      break;
+    case NODE_TYPE.PIER:
+      return 300;
+      break;
     default:
-      return "#FFF"
+      return "#FFF";
       break;
   }
 }
+
 function createNode(height, type, index) {
   let node = {
     height: height,
@@ -68,12 +69,13 @@ function createEdge(node1, node2, type) {
   const edge = {
     node: node2,
     weight: findEdgeWeight(node1.height, node2.height, type),
+    isUsedInShortestPath: false,
     // for visualization
     from: node1.id,
     to: node2.id,
     arrows: "to",
     label: `${findEdgeWeight(node1.height, node2.height, type)}`,
-    color: '#000'
+    color: { color: "#000", opacity: 0.3 },
   };
 
   // use set to check repeated edges
@@ -97,6 +99,17 @@ function createNodes(rawHeights, type) {
 
 function createGraph(houses, markets, bridges, piers) {
   let graph = [];
+  NODES = [];
+  EDGES = [];
+
+  cleanGraphForShortestPath = function () {
+    NODES.map((i) => (i.distanceToSource = Infinity));
+    EDGES.map((i) => {
+      i.isUsedInShortestPath = false;
+      i.color = { color: "#000", opacity: 0.3 };
+    });
+  };
+
   housesNodes = createNodes(houses, NODE_TYPE.HOUSE);
   marketsNodes = createNodes(markets, NODE_TYPE.MARKET);
   bridgesNodes = createNodes(bridges, NODE_TYPE.BRIDGE);
@@ -125,19 +138,28 @@ function createGraph(houses, markets, bridges, piers) {
     graph.push(house);
   });
 
-  // create a network
-  var container = document.getElementById("visualization");
-  var data = {
-    nodes: NODES,
-    edges: EDGES,
+  // create a network (visualization)
+  let network = null;
+  const createVisualization = function () {
+    if (network) {
+      network.destroy();
+      network = null;
+    }
+
+    var container = document.getElementById("visualization");
+    var data = {
+      nodes: NODES,
+      edges: EDGES,
+    };
+    var options = {
+      nodes: {
+        shape: "dot",
+        size: 10,
+      },
+      physics: false,
+    };
+    network = new vis.Network(container, data, options);
   };
-  var options = {
-    nodes: {
-      shape: "dot",
-      size: 10,
-    },
-    physics: false,
-  };
-  new vis.Network(container, data, options);
-  return graph;
+
+  return { graph, cleanGraphForShortestPath, createVisualization };
 }
