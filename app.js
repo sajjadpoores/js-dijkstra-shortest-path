@@ -9,7 +9,8 @@ function createNode(height, type, index) {
     type,
     index: index,
     output: [],
-    outputIndexesSet: new Set()
+    outputIndexesSet: new Set(),
+    distanceToSource: Infinity
   };
 }
 
@@ -74,5 +75,5 @@ submitBtn.addEventListener("click", () => {
   piers = getNumbersFromInput(piersInput);
 
   GRAPH = createGraph(houses, markets, bridges, piers);
-  console.log(GRAPH);
+  dikstra(GRAPH[0]);
 });
