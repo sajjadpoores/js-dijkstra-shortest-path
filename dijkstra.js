@@ -47,6 +47,11 @@ function dikstra(startNode) {
         edge.node.distanceToSource,
         candidate.distanceToSource + edge.weight
       );
+
+      edge.node.label =
+        edge.node.type[0].toUpperCase() +
+        edge.node.index +
+        ` [${edge.node.distanceToSource}]`;
     });
   }
 }

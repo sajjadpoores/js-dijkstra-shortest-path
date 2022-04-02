@@ -57,7 +57,7 @@ function createNode(height, type, index) {
     // for visualization
     id: NODES.length,
     color: getNodeColor(type),
-    label: type[0].toUpperCase() + index,
+    label: type[0].toUpperCase() + index + ` [${Infinity}]`,
     x: getNodeX(type),
     y: height * 50,
   };
