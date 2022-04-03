@@ -1,3 +1,31 @@
+function findEdgesToNode(node) {
+  return EDGES.filter(
+    (e) => e.to === node.id && e.isUsedInShortestPath === true
+  );
+}
+
+function markEdgeAsUnusedAnymore(edges) {
+  edges.forEach((edge) => {
+    edge.isUsedInShortestPath = false;
+    edge.color = {
+      color: "yellow",
+      inherit: false,
+      opacity: 1,
+    };
+    edge.width = 2;
+  });
+}
+
+function markEdgeAsUsed(edge) {
+  edge.width = 3;
+  edge.color = {
+    color: "red",
+    inherit: false,
+    opacity: 1,
+  };
+  edge.isUsedInShortestPath = true;
+}
+
 function dikstra(startNode) {
   startNode.distanceToSource = 0;
   startNode.label =
@@ -10,7 +38,7 @@ function dikstra(startNode) {
   allNodes.forEach((q) => {
     q.heapNode = null;
     const node = heap.insert(q.distanceToSource, q);
-    q.heapNode = node
+    q.heapNode = node;
   });
 
   let candidate;
@@ -21,27 +49,12 @@ function dikstra(startNode) {
         edge.node.distanceToSource >
         candidate.distanceToSource + edge.weight
       ) {
-        const pastEdge = EDGES.find(
-          (e) => e.to === edge.node.id && e.isUsedInShortestPath === true
-        );
-
+        const pastEdge = findEdgesToNode(edge.node);
         if (pastEdge) {
-          pastEdge.isUsedInShortestPath = false;
-          pastEdge.color = {
-            color: "yellow",
-            inherit: false,
-            opacity: 1,
-          };
-          pastEdge.width = 2;
+          markEdgeAsUnusedAnymore(pastEdge);
         }
 
-        edge.width = 3;
-        edge.color = {
-          color: "red",
-          inherit: false,
-          opacity: 1,
-        };
-        edge.isUsedInShortestPath = true;
+        markEdgeAsUsed(edge);
 
         heap.decreaseKey(
           edge.node.heapNode,
@@ -61,22 +74,15 @@ function dikstra(startNode) {
     });
   }
 
-  [...bridgesNodes, ...piersNodes].forEach(node => {
-    const usedEdges = node.output.filter(e => e.isUsedInShortestPath === true)
-    if(usedEdges.length === 0 ) {
-      const pastEdge = EDGES.find(
-        (e) => e.to === node.id && e.isUsedInShortestPath === true
-      );
+  [...bridgesNodes, ...piersNodes].forEach((node) => {
+    const nodeIsNotUsedInShortestPath =
+      node.output.filter((e) => e.isUsedInShortestPath === true).length === 0;
 
-      if (pastEdge) {
-        pastEdge.isUsedInShortestPath = false;
-        pastEdge.color = {
-          color: "yellow",
-          inherit: false,
-          opacity: 1,
-        };
-        pastEdge.width = 2;
+    if (nodeIsNotUsedInShortestPath) {
+      const edgesNeedToBeUnuse = findEdgesToNode(node);
+      if (edgesNeedToBeUnuse) {
+        markEdgeAsUnusedAnymore(edgesNeedToBeUnuse);
       }
     }
-  })
+  });
 }
