@@ -6,14 +6,16 @@ function dikstra(startNode) {
     ` [${startNode.distanceToSource}]`;
 
   const allNodes = [startNode, ...bridgesNodes, ...piersNodes, ...marketsNodes];
-  let heap = new FibonacciHeap((a, b) => {
-    return +(a.key.distanceToSource - b.key.distanceToSource);
+  let heap = new FibonacciHeap();
+  allNodes.forEach((q) => {
+    q.heapNode = null;
+    const node = heap.insert(q.distanceToSource, q);
+    q.heapNode = node
   });
-  allNodes.forEach((q) => heap.insert(q));
 
   let candidate;
   while ((candidate = heap.extractMinimum())) {
-    candidate = candidate.key;
+    candidate = candidate.value;
     candidate.output.forEach((edge) => {
       if (
         edge.node.distanceToSource >
@@ -22,6 +24,7 @@ function dikstra(startNode) {
         const pastEdge = EDGES.find(
           (e) => e.to === edge.node.id && e.isUsedInShortestPath === true
         );
+
         if (pastEdge) {
           pastEdge.isUsedInShortestPath = false;
           pastEdge.color = {
@@ -39,6 +42,11 @@ function dikstra(startNode) {
           opacity: 1,
         };
         edge.isUsedInShortestPath = true;
+
+        heap.decreaseKey(
+          edge.node.heapNode,
+          candidate.distanceToSource + edge.weight
+        );
       }
 
       edge.node.distanceToSource = Math.min(
@@ -52,4 +60,23 @@ function dikstra(startNode) {
         ` [${edge.node.distanceToSource}]`;
     });
   }
+
+  [...bridgesNodes, ...piersNodes].forEach(node => {
+    const usedEdges = node.output.filter(e => e.isUsedInShortestPath === true)
+    if(usedEdges.length === 0 ) {
+      const pastEdge = EDGES.find(
+        (e) => e.to === node.id && e.isUsedInShortestPath === true
+      );
+
+      if (pastEdge) {
+        pastEdge.isUsedInShortestPath = false;
+        pastEdge.color = {
+          color: "yellow",
+          inherit: false,
+          opacity: 1,
+        };
+        pastEdge.width = 2;
+      }
+    }
+  })
 }
