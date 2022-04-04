@@ -31,5 +31,7 @@ here is a screenshot of project:
 ![screen shot](https://github.com/sajjadpoores/shortest-path-problem/blob/main/screenshot.png?raw=true)
 
 `Hint`:
+
 :red_circle: red edges are answer
+
 :yellow_heart: yellow edges were choosed for shortest path before red edges being found.
