@@ -6,14 +6,16 @@ solution is provided in a few steps:
 1. The first thing we are doing is to create a weighted directed graph from user input.
 
 - **A:** Every house, bridge, pier, market is considered as a node and the graph is created in `graph.js` file using 
+
 `function createGraph(houses, markets, bridges, piers)`
+
 function.
 
 - **B:** Weight of each edge is calculated using following formula:
 ```|(height1 - height2 + 1) * type|```
 where `type` is 2 for pedestrians and it is 1 for bicycle riders and `height1, height2` are the height of the two nodes belonging to this edge.
 
-2. for each house calculating the shortest path from it's node to all market nodes using Dijkstra algorithm.
+2. for each house we calculate the shortest path from its corresponding node to all market nodes using Dijkstra algorithm.
 
 **Dijkstra:** is a algorithm that finds the shortest path from all nodes to a certain node (called source).
 
