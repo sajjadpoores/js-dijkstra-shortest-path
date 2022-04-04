@@ -5,10 +5,11 @@ The provided code is meant to solve the cummunere company's challege. The challe
 solution is provided in a few steps:
 1. The first thing we are doing is to create a weighted directed graph from user input.
 
-**A:** Every house, bridge, pier, market is considered as a node and the graph is created in `graph.js` file using 
+- **A:** Every house, bridge, pier, market is considered as a node and the graph is created in `graph.js` file using 
 `function createGraph(houses, markets, bridges, piers)`
 function.
-**B:** Weight of each edge is calculated using following formula:
+
+- **B:** Weight of each edge is calculated using following formula:
 ```|(height1 - height2 + 1) * type|```
 where `type` is 2 for pedestrians and it is 1 for bicycle riders and `height1, height2` are the height of the two nodes belonging to this edge.
 
