@@ -28,4 +28,8 @@ As we have used `Fibonacci heap` in this implementation the final time complexit
 for better understanding of what is the result of the solution I implemented a visualization of the final graph using https://visjs.github.io/vis-network/ `vis-network` repository.
 
 here is a screenshot of project:
-![screen shot](https://github.com/[sajjadpoores]/[shortest-path-problem]/blob/[Main]/screenshot.png?raw=true)
+![screen shot](https://github.com/sajjadpoores/shortest-path-problem/blob/main/screenshot.png?raw=true)
+
+`Hint`:
+:red_circle: red edges are answer
+:yellow_heart: yellow edges were choosed for shortest path before red edges being found.
