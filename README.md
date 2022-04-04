@@ -33,7 +33,15 @@ here is a screenshot of project:
 ![screen shot](https://github.com/sajjadpoores/shortest-path-problem/blob/main/screenshot.png?raw=true)
 
 `Hint`:
+:large_orange_diamond: orange nodes are bridges.
 
-:red_circle: red edges are answer
+:red_circle: red nodes are piers.
+
+:purple_heart: purple nodes are markets.
+
+:green_heart: green nodes are houses.
+
+
+:red_circle: red edges are used as shortest path (the number inside `[`bracket`]` is the shortest path from that node to source.)
 
 :yellow_heart: yellow edges were choosed for shortest path before red edges being found.
