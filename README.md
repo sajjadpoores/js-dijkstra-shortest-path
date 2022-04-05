@@ -25,7 +25,7 @@ Dijkstra algorithm has time complexity of `O(V^2)` where V is the number of vert
 
 **BUT** Dijkstra algorithm could be improved by using `Fibonacci heap` as priority queue and that would decrease its order to `O(E + V log V)` (*V* is number of vertexes and *E* is number of edges).
 
-As we have used `Fibonacci heap` in this implementation and we are calling Dijkstra H times (H = number of houses), the final time complexity of the problem is `O(H*(E + V LOG V)`.
+As we have used `Fibonacci heap` in this implementation and we are calling Dijkstra H times (H = number of houses), the final time complexity of the problem is `O(H*(E + V LOG V))`.
 
 **NOTE:** To implement fibonacci heap in javascript I used this repository: https://github.com/gwtw/js-fibonacci-heap
 
