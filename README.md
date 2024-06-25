@@ -1,6 +1,5 @@
 # The Challenge
-The provided code is meant to solve an online challenge. 
-The challenge is to find the shortest path from each house to each market. There are bridges and piers in between houses and markets. For each road there is a weight and we must find the minimum path for each house to each market.
+The provided code is meant to solve an online challenge. The challenge is to find the shortest path. In this challenge there are several entities: Houses, Markets, Bridges, and Piers. There are bridges and piers in between houses and markets. For each road there is a weight and the goals is find the minimum path for each house to each market.
 
 ## Solution
 solution is provided in a few steps:
